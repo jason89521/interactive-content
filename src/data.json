@@ -1,8 +1,5 @@
 {
-  "currentUser": {
-    "image": "./images/avatars/image-juliusomo.png",
-    "username": "juliusomo"
-  },
+  "currentUser": "juliusomo",
   "comments": [
     {
       "id": 1,

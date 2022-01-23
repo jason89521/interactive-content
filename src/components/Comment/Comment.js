@@ -5,25 +5,7 @@ import styles from './Comment.module.scss';
 import { ReactComponent as PlusIcon } from '../../images/icon-plus.svg';
 import { ReactComponent as MinusIcon } from '../../images/icon-minus.svg';
 import { ReactComponent as ReplyIcon } from '../../images/icon-reply.svg';
-import amyrobson from '../../images/avatars/image-amyrobson.png';
-import juliusomo from '../../images/avatars/image-juliusomo.png';
-import maxblagun from '../../images/avatars/image-maxblagun.png';
-import ramsesmiron from '../../images/avatars/image-ramsesmiron.png';
-
-const getAvatar = name => {
-  switch (name) {
-    case 'amyrobson':
-      return amyrobson;
-    case 'juliusomo':
-      return juliusomo;
-    case 'maxblagun':
-      return maxblagun;
-    case 'ramsesmiron':
-      return ramsesmiron;
-    default:
-      return '';
-  }
-};
+import { getAvatar } from '../../utils';
 
 const Comment = ({ comment }) => {
   const { content, createdAt, score, replyingTo, user } = comment;
