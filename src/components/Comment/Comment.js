@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatDistanceToNow } from 'date-fns';
 
 import styles from './Comment.module.scss';
 import plusIcon from '../../images/icon-plus.svg';
@@ -41,7 +42,7 @@ const Comment = ({ comment }) => {
       <div className={styles.main}>
         <img className={styles.avatar} src={getAvatar(user)} alt="avatar" />
         <span className={styles.author}>{user}</span>
-        <span className={styles.date}>{createdAt}</span>
+        <span className={styles.date}>{formatDistanceToNow(parseInt(createdAt, 10))} ago</span>
         <p className={styles.content}>{content}</p>
       </div>
 
