@@ -2,9 +2,9 @@ import React from 'react';
 import { formatDistanceToNow } from 'date-fns';
 
 import styles from './Comment.module.scss';
-import {ReactComponent as PlusIcon} from '../../images/icon-plus.svg';
-import {ReactComponent as MinusIcon} from '../../images/icon-minus.svg';
-import {ReactComponent as ReplyIcon} from '../../images/icon-reply.svg';
+import { ReactComponent as PlusIcon } from '../../images/icon-plus.svg';
+import { ReactComponent as MinusIcon } from '../../images/icon-minus.svg';
+import { ReactComponent as ReplyIcon } from '../../images/icon-reply.svg';
 import amyrobson from '../../images/avatars/image-amyrobson.png';
 import juliusomo from '../../images/avatars/image-juliusomo.png';
 import maxblagun from '../../images/avatars/image-maxblagun.png';
@@ -43,7 +43,10 @@ const Comment = ({ comment }) => {
         <img className={styles.avatar} src={getAvatar(user)} alt="avatar" />
         <span className={styles.author}>{user}</span>
         <span className={styles.date}>{formatDistanceToNow(parseInt(createdAt, 10))} ago</span>
-        <p className={styles.content}>{content}</p>
+        <p className={styles.content}>
+          {replyingTo ? <span>@{replyingTo} </span> : null}
+          {content}
+        </p>
       </div>
 
       <button className={styles.reply}>

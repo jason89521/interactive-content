@@ -65,6 +65,11 @@
   flex: 0 0 100%;
   font-size: 1.4rem;
   color: $gray-blue;
+
+  span {
+    font-weight: 700;
+    color: $blue;
+  }
 }
 
 .reply {
