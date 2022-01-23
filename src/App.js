@@ -1,17 +1,20 @@
-import React, {useState} from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-import './reset.scss'
+import './sass/reset.scss';
 import styles from './App.module.scss';
-import data from './data.json';
-
 import CommentList from './components/CommentList';
+import ReplyBox from './components/Reply';
 
 const App = () => {
-  const [comments, setComments] = useState(data.comments);
+  const comments = useSelector(state => state.comments);
 
-  return <div className={styles.app}>
-    <CommentList comments={comments} />
-  </div>
-}
+  return (
+    <div className={styles.app}>
+      {comments ? <CommentList comments={comments} /> : null}
+      <ReplyBox />
+    </div>
+  );
+};
 
 export default App;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import styles from './CommentList.module.scss';
 import Comment from '../Comment';
@@ -9,7 +9,7 @@ const CommentList = ({ comments, isReplies }) => {
       return (
         <React.Fragment key={comment.id}>
           <Comment comment={comment} />
-          <CommentList comments={comment.replies} isReplies />;
+          <CommentList comments={comment.replies} isReplies />
         </React.Fragment>
       );
     }
@@ -17,7 +17,7 @@ const CommentList = ({ comments, isReplies }) => {
     return <Comment key={comment.id} comment={comment} />;
   });
 
-  const className = `${styles['comment-list']} ${isReplies ? styles['replies'] : ''}`;;
+  const className = `${styles['comment-list']} ${isReplies ? styles['replies'] : ''}`;
 
   return <div className={className}>{renderedComments}</div>;
 };

@@ -1,0 +1,41 @@
+@use '../../sass/abstract' as *;
+
+.reply {
+  margin-top: 1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  @include block;
+}
+
+.avatar {
+  width: $avatar-size;
+  height: $avatar-size;
+}
+
+.input {
+  resize: none;
+  flex: 1 0;
+  line-height: 1.5;
+  border: 2px solid $gray;
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+
+  &:focus {
+    outline: none;
+    border-color: $light-blue;
+  }
+}
+
+.send {
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  background-color: $blue;
+  color: white;
+
+  &:hover {
+    background-color: lighten($blue, 30%)
+  }
+}

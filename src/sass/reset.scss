@@ -1,4 +1,4 @@
-@use './sass/abstract' as *;
+@use './abstract' as *;
 
 *,
 *::after,
@@ -18,4 +18,8 @@ body {
   min-height: 100vh;
 
   background-color: $gray;
+}
+
+button {
+  cursor: pointer;
 }

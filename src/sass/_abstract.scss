@@ -8,3 +8,11 @@ $pink: hsl(357, 100%, 86%);
 
 $gray: hsl(223, 19%, 93%);
 $light-gray: hsl(228, 33%, 97%);
+
+$avatar-size: 3rem;
+
+@mixin block {
+  padding: 2rem;
+  background-color: white;
+  border-radius: 5px;
+}
