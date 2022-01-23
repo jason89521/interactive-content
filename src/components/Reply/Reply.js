@@ -19,6 +19,7 @@ const ReplyBox = () => {
     if (!/\S/.test(value)) return;
 
     dispatch(send(user, value));
+    setValue('');
   };
 
   return (
