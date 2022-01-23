@@ -2,9 +2,9 @@ import React from 'react';
 import { formatDistanceToNow } from 'date-fns';
 
 import styles from './Comment.module.scss';
-import plusIcon from '../../images/icon-plus.svg';
-import minusIcon from '../../images/icon-minus.svg';
-import replyIcon from '../../images/icon-reply.svg';
+import {ReactComponent as PlusIcon} from '../../images/icon-plus.svg';
+import {ReactComponent as MinusIcon} from '../../images/icon-minus.svg';
+import {ReactComponent as ReplyIcon} from '../../images/icon-reply.svg';
 import amyrobson from '../../images/avatars/image-amyrobson.png';
 import juliusomo from '../../images/avatars/image-juliusomo.png';
 import maxblagun from '../../images/avatars/image-maxblagun.png';
@@ -31,11 +31,11 @@ const Comment = ({ comment }) => {
     <div className={styles.comment}>
       <div className={styles.rating}>
         <button>
-          <img src={plusIcon} alt="" />
+          <PlusIcon />
         </button>
         <span>{score}</span>
         <button>
-          <img src={minusIcon} alt="" />
+          <MinusIcon />
         </button>
       </div>
 
@@ -47,7 +47,7 @@ const Comment = ({ comment }) => {
       </div>
 
       <button className={styles.reply}>
-        <img src={replyIcon} alt="" />
+        <ReplyIcon />
         Reply
       </button>
     </div>
