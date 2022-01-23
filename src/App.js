@@ -1,25 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import './reset.scss'
+import styles from './App.module.scss';
+import data from './data.json';
+
+import CommentList from './components/CommentList';
+
+const App = () => {
+  const [comments, setComments] = useState(data.comments);
+
+  return <div className={styles.app}>
+    <CommentList comments={comments} />
+  </div>
 }
 
 export default App;

@@ -1,0 +1,84 @@
+@use '../../sass/abstract' as *;
+
+.comment {
+  position: relative;
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 5px;
+
+
+
+
+
+
+}
+
+.rating {
+  padding: 0.75rem;
+  flex: 0 0 3.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $light-gray;
+  border-radius: 10px;
+
+  button {
+    background: none;
+    border: none;
+    outline: none;
+  }
+
+  span {
+    color: $blue;
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+}
+
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+}
+
+.author {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: $dark-blue;
+}
+
+.date {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: $gray-blue;
+}
+
+.content {
+  flex: 0 0 100%;
+  font-size: 1.4rem;
+  color: $gray-blue;
+}
+
+.reply {
+  position: absolute;
+  right: 2rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: $blue;
+}
