@@ -27,6 +27,11 @@
       "react-app/jest"
     ]
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jason89521/interactive-content"
+  },
+  "homepage": "https://jason89521.github.io/interactive-content/",
   "browserslist": {
     "production": [
       ">0.2%",
