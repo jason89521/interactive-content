@@ -1,10 +1,18 @@
 @use '../../sass/abstract' as *;
 
+@mixin contentBlock {
+  flex: 0 0 100%;
+  font-size: 1.4rem;
+}
+
 .comment {
   position: relative;
   display: flex;
   gap: 2rem;
   @include block;
+  @include bp-small {
+    flex-direction: column-reverse;
+  }
 }
 
 .rating {
@@ -35,6 +43,18 @@
     font-weight: 700;
     font-size: 1.5rem;
   }
+
+  @include bp-small {
+    width: 8rem;
+    display: flex;
+    flex-direction: row;
+
+    button {
+      &:last-child {
+        margin-top: -0.5rem;
+      }
+    }
+  }
 }
 
 .main {
@@ -57,15 +77,21 @@
   color: $dark-blue;
 }
 
+.tag {
+  background-color: $blue;
+  border-radius: 2px;
+  color: white;
+  padding: 0.25rem 0.5rem;
+}
+
 .date {
   font-size: 1.2rem;
   font-weight: 500;
   color: $gray-blue;
-}
 
-@mixin contentBlock {
-  flex: 0 0 100%;
-  font-size: 1.4rem;
+  @include bp-small {
+    margin-left: auto;
+  }
 }
 
 .content {
@@ -84,6 +110,7 @@
 
 .buttons {
   position: absolute;
+  top: 2.5rem;
   right: 2rem;
   display: flex;
   gap: 1.5rem;
@@ -98,6 +125,11 @@
     outline: none;
     font-size: 1.6rem;
     font-weight: 700;
+  }
+
+  @include bp-small {
+    top: auto;
+    bottom: 3rem;
   }
 }
 

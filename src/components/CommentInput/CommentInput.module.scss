@@ -6,6 +6,15 @@
   align-items: flex-start;
   gap: 1rem;
   @include block;
+
+  * {
+    font-size: inherit;
+  }
+
+  @include bp-small {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
 }
 
 .avatar {
@@ -15,6 +24,11 @@
 
 .input {
   flex: 1 0;
+
+  @include bp-small {
+    flex: 0 0 100%;
+    order: -1;
+  }
 }
 
 .button {

@@ -15,4 +15,40 @@ $avatar-size: 3rem;
   padding: 2rem;
   background-color: white;
   border-radius: 5px;
+  @media screen and (max-width: 40.625em) {
+    padding: 2rem;
+  }
+}
+
+// breakpoints
+$bp-largest: 68.75em;
+
+@mixin bp-largest {
+  @media screen and (max-width: 68.75em) {
+    @content;
+  }
+}
+
+@mixin bp-large {
+  @media screen and (max-width: 56.25em) {
+    @content;
+  }
+}
+
+@mixin bp-medium {
+  @media screen and (max-width: 46.875em) {
+    @content;
+  }
+}
+
+@mixin bp-small {
+  @media screen and (max-width: 40.625em) {
+    @content;
+  }
+}
+
+@mixin bp-smallest {
+  @media screen and (max-width: 25em) {
+    @content;
+  }
 }

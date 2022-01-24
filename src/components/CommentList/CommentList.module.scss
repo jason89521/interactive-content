@@ -3,19 +3,18 @@
 .comment-list {
   margin-bottom: 1.5rem;
 
-  .replies {
-    margin-left: 3.75rem;
-    padding-left: calc(3.75rem - 2px);
-    border-left: 2px solid rgba($light-blue, 0.5);
-  }
-
   > *:not(:last-child) {
     margin-bottom: 1.5rem;
   }
 }
 
-.comment-list.replies {
+.replies {
   margin-left: 3.75rem;
   padding-left: calc(3.75rem - 2px);
   border-left: 2px solid rgba($light-blue, 0.5);
+
+  @include bp-small {
+    margin-left: 0;
+    padding-left: calc(2rem - 2px);
+  }
 }

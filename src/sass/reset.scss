@@ -13,6 +13,10 @@ html {
   box-sizing: border-box;
   font-size: 62.5%;
   font-family: 'Rubik', sans-serif;
+
+  @include bp-smallest {
+    font-size: 37.5%;
+  }
 }
 
 body {
@@ -36,5 +40,9 @@ textarea {
   &:focus {
     outline: none;
     border-color: $blue;
+  }
+
+  @include bp-smallest {
+    border-radius: 5px;
   }
 }

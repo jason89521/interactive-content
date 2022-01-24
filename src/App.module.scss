@@ -1,3 +1,17 @@
+@use './sass/abstract' as *;
+
 .app {
   margin: 5rem 25rem;
+
+  @include bp-largest {
+    margin: 5rem 10rem;
+  }
+
+  @include bp-large {
+    margin: 2.5rem 5rem;
+  }
+
+  @include bp-medium {
+    margin: 2rem;
+  }
 }

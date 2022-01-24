@@ -95,6 +95,7 @@ const Comment = ({ comment, onReplyClick }) => {
         <div className={styles.main}>
           <img className={styles.avatar} src={getAvatar(user)} alt="avatar" />
           <span className={styles.author}>{user}</span>
+          {user === currentUser ? <span className={styles.tag}>you</span> : null}
           <span className={styles.date}>{formatDistanceToNow(parseInt(createdAt, 10))} ago</span>
           {renderedContent}
         </div>
