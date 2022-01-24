@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { formatDistanceToNow } from 'date-fns';
+import { formatDistanceToNow, set } from 'date-fns';
 
 import styles from './Comment.module.scss';
 import { ReactComponent as PlusIcon } from '../../images/icon-plus.svg';
@@ -10,12 +10,14 @@ import { ReactComponent as EditIcon } from '../../images/icon-edit.svg';
 import { ReactComponent as DeleteIcon } from '../../images/icon-delete.svg';
 import { getAvatar } from '../../utils';
 import { deleteById, updateById } from '../../slices/commentsSlice';
+import Popup from '../Popup';
 
 const Comment = ({ comment, onReplyClick }) => {
   const { id, content, createdAt, score, replyingTo, user } = comment;
 
   const [isEditing, setIsEditing] = useState(false);
   const [value, setValue] = useState('');
+  const [isPopupShoing, setIsPopupShoing] = useState(false);
 
   const currentUser = useSelector(state => state.currentUser);
   const dispatch = useDispatch();
@@ -32,14 +34,14 @@ const Comment = ({ comment, onReplyClick }) => {
 
   const onUpdateClick = () => {
     const newContent = value.substring(value.indexOf(' ') + 1);
-    if(newContent === `@${replyingTo}` || !/\S/.test(newContent)) return;
+    if (newContent === `@${replyingTo}` || !/\S/.test(newContent)) return;
     dispatch(updateById(id, newContent));
     setIsEditing(false);
   };
 
   const onButtonClick = type => {
     if (type === 'reply' && onReplyClick) onReplyClick(id);
-    else if (type === 'delete') dispatch(deleteById(id));
+    else if (type === 'delete') setIsPopupShoing(true);
     else if (type === 'edit') setIsEditing(!isEditing);
   };
 
@@ -78,26 +80,37 @@ const Comment = ({ comment, onReplyClick }) => {
   );
 
   return (
-    <div className={styles.comment}>
-      <div className={styles.rating}>
-        <button>
-          <PlusIcon />
-        </button>
-        <span>{score}</span>
-        <button>
-          <MinusIcon />
-        </button>
-      </div>
+    <React.Fragment>
+      <div className={styles.comment}>
+        <div className={styles.rating}>
+          <button>
+            <PlusIcon />
+          </button>
+          <span>{score}</span>
+          <button>
+            <MinusIcon />
+          </button>
+        </div>
 
-      <div className={styles.main}>
-        <img className={styles.avatar} src={getAvatar(user)} alt="avatar" />
-        <span className={styles.author}>{user}</span>
-        <span className={styles.date}>{formatDistanceToNow(parseInt(createdAt, 10))} ago</span>
-        {renderedContent}
-      </div>
+        <div className={styles.main}>
+          <img className={styles.avatar} src={getAvatar(user)} alt="avatar" />
+          <span className={styles.author}>{user}</span>
+          <span className={styles.date}>{formatDistanceToNow(parseInt(createdAt, 10))} ago</span>
+          {renderedContent}
+        </div>
 
-      <div className={styles.buttons}>{renderButtons()}</div>
-    </div>
+        <div className={styles.buttons}>{renderButtons()}</div>
+      </div>
+      {isPopupShoing ? (
+        <Popup
+          hide={() => setIsPopupShoing(false)}
+          confirm={() => {
+            dispatch(deleteById(id));
+            setIsPopupShoing(false);
+          }}
+        />
+      ) : null}
+    </React.Fragment>
   );
 };
 
