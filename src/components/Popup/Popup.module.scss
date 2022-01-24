@@ -15,20 +15,32 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  padding: 2rem;
-  width: 35rem;
+  padding: 3rem;
+  width: 25%;
   margin: auto;
   background-color: white;
   border-radius: 10px;
+
+  @include bp-largest {
+    width: 45%;
+  }
+
+  @include bp-medium {
+    width: 65%;
+  }
+
+  @include bp-small {
+    width: 85%;
+  }
 }
 
 .title {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 700;
 }
 
 .content {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   color: $gray-blue;
 }
 
@@ -38,11 +50,16 @@
 
   button {
     text-transform: uppercase;
-    padding: 1rem 3rem;
+    padding: 2rem 3rem;
     outline: none;
     border: none;
     border-radius: 5px;
     color: white;
+    font-size: 1.6rem;
+
+    @include bp-small {
+      padding: 1.5rem 2rem;
+    }
   }
 }
 

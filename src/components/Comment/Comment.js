@@ -27,13 +27,13 @@ const Comment = ({ comment, onReplyClick }) => {
   }, [content, replyingTo, isEditing]);
 
   const onInputChange = e => {
-    if (e.target.value.split(' ', 1)[0] === `@${replyingTo}`) {
-      setValue(e.target.value);
-    }
+    if (replyingTo && e.target.value.split(' ', 1)[0] !== `@${replyingTo}`) return;
+
+    setValue(e.target.value);
   };
 
   const onUpdateClick = () => {
-    const newContent = value.substring(value.indexOf(' ') + 1);
+    const newContent = replyingTo ? value.substring(value.indexOf(' ') + 1) : value;
     if (newContent === `@${replyingTo}` || !/\S/.test(newContent)) return;
     dispatch(updateById(id, newContent));
     setIsEditing(false);
