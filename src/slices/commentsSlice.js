@@ -6,13 +6,12 @@ const initialState = localStorageData ? localStorageData : data.comments;
 const getNewId = comments => {
   let max = 0;
   comments.forEach(comment => {
-    if (comment.replies && comment.replies.length > 0) {
-      console.log(comment.replies.reduce((ids, reply) => [...ids, reply.id], []));
+    if (comment.replies && comment.replies.length > 0)
       max = Math.max(max, ...comment.replies.reduce((ids, reply) => [...ids, reply.id], []));
-    }
+
     max = Math.max(max, comment.id);
   });
-  return max+1;
+  return max + 1;
 };
 
 const commentsSlice = createSlice({
