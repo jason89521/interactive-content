@@ -14,18 +14,7 @@
 }
 
 .input {
-  resize: none;
   flex: 1 0;
-  line-height: 1.5;
-  border: 2px solid $gray;
-  border-radius: 10px;
-  padding: 1rem 1.5rem;
-
-  &:hover,
-  &:focus {
-    outline: none;
-    border-color: $blue;
-  }
 }
 
 .button {

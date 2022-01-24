@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { formatDistanceToNow } from 'date-fns';
 
@@ -9,17 +9,38 @@ import { ReactComponent as ReplyIcon } from '../../images/icon-reply.svg';
 import { ReactComponent as EditIcon } from '../../images/icon-edit.svg';
 import { ReactComponent as DeleteIcon } from '../../images/icon-delete.svg';
 import { getAvatar } from '../../utils';
-import { deleteById } from '../../slices/commentsSlice';
+import { deleteById, updateById } from '../../slices/commentsSlice';
 
 const Comment = ({ comment, onReplyClick }) => {
   const { id, content, createdAt, score, replyingTo, user } = comment;
 
+  const [isEditing, setIsEditing] = useState(false);
+  const [value, setValue] = useState('');
+
   const currentUser = useSelector(state => state.currentUser);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setValue(replyingTo ? `@${replyingTo} ${content}` : content);
+  }, [content, replyingTo, isEditing]);
+
+  const onInputChange = e => {
+    if (e.target.value.split(' ', 1)[0] === `@${replyingTo}`) {
+      setValue(e.target.value);
+    }
+  };
+
+  const onUpdateClick = () => {
+    const newContent = value.substring(value.indexOf(' ') + 1);
+    if(newContent === `@${replyingTo}` || !/\S/.test(newContent)) return;
+    dispatch(updateById(id, newContent));
+    setIsEditing(false);
+  };
 
   const onButtonClick = type => {
     if (type === 'reply' && onReplyClick) onReplyClick(id);
     else if (type === 'delete') dispatch(deleteById(id));
+    else if (type === 'edit') setIsEditing(!isEditing);
   };
 
   const renderButton = (type, Icon) => (
@@ -42,6 +63,20 @@ const Comment = ({ comment, onReplyClick }) => {
     }
   };
 
+  const renderedContent = isEditing ? (
+    <React.Fragment>
+      <textarea className={styles.textarea} rows={3} value={value} onChange={onInputChange} />
+      <button className={styles.update} onClick={onUpdateClick}>
+        UPDATE
+      </button>
+    </React.Fragment>
+  ) : (
+    <p className={styles.content}>
+      {replyingTo ? <span>@{replyingTo} </span> : null}
+      {content}
+    </p>
+  );
+
   return (
     <div className={styles.comment}>
       <div className={styles.rating}>
@@ -58,10 +93,7 @@ const Comment = ({ comment, onReplyClick }) => {
         <img className={styles.avatar} src={getAvatar(user)} alt="avatar" />
         <span className={styles.author}>{user}</span>
         <span className={styles.date}>{formatDistanceToNow(parseInt(createdAt, 10))} ago</span>
-        <p className={styles.content}>
-          {replyingTo ? <span>@{replyingTo} </span> : null}
-          {content}
-        </p>
+        {renderedContent}
       </div>
 
       <div className={styles.buttons}>{renderButtons()}</div>

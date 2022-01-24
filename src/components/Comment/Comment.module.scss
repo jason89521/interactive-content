@@ -10,6 +10,7 @@
 .rating {
   padding: 0.75rem;
   flex: 0 0 3.5rem;
+  height: 8rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -37,6 +38,7 @@
 }
 
 .main {
+  flex: 1 0;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -61,9 +63,13 @@
   color: $gray-blue;
 }
 
-.content {
+@mixin contentBlock {
   flex: 0 0 100%;
   font-size: 1.4rem;
+}
+
+.content {
+  @include contentBlock();
   color: $gray-blue;
 
   span {
@@ -72,12 +78,16 @@
   }
 }
 
+.textarea {
+  @include contentBlock();
+}
+
 .buttons {
   position: absolute;
   right: 2rem;
   display: flex;
   gap: 1.5rem;
-  
+
   button {
     text-transform: capitalize;
     display: flex;
@@ -111,5 +121,20 @@
     path {
       fill: lighten($red, 20%);
     }
+  }
+}
+
+.update {
+  margin-left: auto;
+  text-transform: uppercase;
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  background-color: $blue;
+  color: white;
+
+  &:hover {
+    background-color: lighten($blue, 30%);
   }
 }

@@ -61,10 +61,35 @@ const commentsSlice = createSlice({
       };
 
       deleteComment(state);
+      localStorage.setItem('comments', JSON.stringify(state));
+    },
+    updateById: {
+      reducer: (state, action) => {
+        const { id, newContent } = action.payload;
+        for (let i = 0; i < state.length; i++) {
+          if (state[i].id === id) {
+            state[i].content = newContent;
+            localStorage.setItem('comments', JSON.stringify(state));
+            return;
+          }
+
+          if (state[i].replies) {
+            const replies = state[i].replies;
+            for (let j = 0; j < replies.length; j++) {
+              if (replies[j].id === id) {
+                replies[j].content = newContent;
+                localStorage.setItem('comments', JSON.stringify(state));
+                return;
+              }
+            }
+          }
+        }
+      },
+      prepare: (id, newContent) => ({ payload: { id, newContent } }),
     },
   },
 });
 
-export const { sendComment, replyComment, deleteById } = commentsSlice.actions;
+export const { sendComment, replyComment, deleteById, updateById } = commentsSlice.actions;
 
 export default commentsSlice.reducer;
