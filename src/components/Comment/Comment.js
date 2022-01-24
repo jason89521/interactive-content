@@ -7,8 +7,13 @@ import { ReactComponent as MinusIcon } from '../../images/icon-minus.svg';
 import { ReactComponent as ReplyIcon } from '../../images/icon-reply.svg';
 import { getAvatar } from '../../utils';
 
-const Comment = ({ comment }) => {
-  const { content, createdAt, score, replyingTo, user } = comment;
+const Comment = ({ comment, onReplyClick }) => {
+  const { id, content, createdAt, score, replyingTo, user } = comment;
+
+  const onClick = () => {
+    if (onReplyClick) onReplyClick(id);
+  };
+
   return (
     <div className={styles.comment}>
       <div className={styles.rating}>
@@ -31,7 +36,7 @@ const Comment = ({ comment }) => {
         </p>
       </div>
 
-      <button className={styles.reply}>
+      <button className={styles.reply} onClick={onClick}>
         <ReplyIcon />
         Reply
       </button>
