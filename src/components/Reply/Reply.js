@@ -3,12 +3,12 @@ import { useDispatch } from 'react-redux';
 
 import Comment from '../Comment';
 import CommentInput from '../CommentInput';
-import { reply as replyAction } from '../../slices/commentsSlice';
+import { replyComment } from '../../slices/commentsSlice';
 
 const Reply = ({ repliedComment, parentId, clear }) => {
   const dispatch = useDispatch();
   const sendReply = (user, content) => {
-    dispatch(replyAction({ user, content, replyingTo: repliedComment.user }, parentId));
+    dispatch(replyComment({ user, content, replyingTo: repliedComment.user }, parentId));
     clear(repliedComment.id);
   };
 

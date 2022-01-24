@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './CommentInput.module.scss';
-import { send } from '../../slices/commentsSlice';
+import { sendComment } from '../../slices/commentsSlice';
 import { getAvatar } from '../../utils';
 
 const CommentInput = ({ isReply, sendReply }) => {
@@ -23,7 +23,7 @@ const CommentInput = ({ isReply, sendReply }) => {
       return;
     }
 
-    dispatch(send(currentUser, value));
+    dispatch(sendComment(currentUser, value));
     setValue('');
   };
 

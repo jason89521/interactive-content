@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { formatDistanceToNow } from 'date-fns';
 
 import styles from './Comment.module.scss';
@@ -9,13 +9,21 @@ import { ReactComponent as ReplyIcon } from '../../images/icon-reply.svg';
 import { ReactComponent as EditIcon } from '../../images/icon-edit.svg';
 import { ReactComponent as DeleteIcon } from '../../images/icon-delete.svg';
 import { getAvatar } from '../../utils';
+import { deleteById } from '../../slices/commentsSlice';
 
 const Comment = ({ comment, onReplyClick }) => {
   const { id, content, createdAt, score, replyingTo, user } = comment;
-  const currentUser = useSelector(state => state.currentUser);
 
-  const renderButton = (type, Icon, onClick) => (
-    <button className={styles[type]} onClick={() => onClick(id)}>
+  const currentUser = useSelector(state => state.currentUser);
+  const dispatch = useDispatch();
+
+  const onButtonClick = type => {
+    if (type === 'reply' && onReplyClick) onReplyClick(id);
+    else if (type === 'delete') dispatch(deleteById(id));
+  };
+
+  const renderButton = (type, Icon) => (
+    <button className={styles[type]} onClick={() => onButtonClick(type)}>
       <Icon />
       {type}
     </button>
@@ -30,7 +38,7 @@ const Comment = ({ comment, onReplyClick }) => {
         </React.Fragment>
       );
     } else {
-      return renderButton('reply', ReplyIcon, onReplyClick);
+      return renderButton('reply', ReplyIcon);
     }
   };
 

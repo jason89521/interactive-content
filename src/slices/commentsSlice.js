@@ -14,7 +14,7 @@ const commentsSlice = createSlice({
   name: 'comments',
   initialState,
   reducers: {
-    send: {
+    sendComment: {
       reducer: (state, action) => {
         const newComment = {
           id: getNewId(state),
@@ -28,7 +28,7 @@ const commentsSlice = createSlice({
       },
       prepare: (user, content) => ({ payload: { user, content } }),
     },
-    reply: {
+    replyComment: {
       reducer: (state, action) => {
         const reply = {
           id: getNewId(state),
@@ -47,9 +47,24 @@ const commentsSlice = createSlice({
         },
       }),
     },
+    deleteById: (state, action) => {
+      const deletedId = action.payload;
+      const deleteComment = comments => {
+        for (let i = 0; i < comments.length; i++) {
+          if (comments[i].id === deletedId) {
+            comments.splice(i, 1);
+            return;
+          }
+
+          if (comments[i].replies) deleteComment(comments[i].replies);
+        }
+      };
+
+      deleteComment(state);
+    },
   },
 });
 
-export const { send, reply } = commentsSlice.actions;
+export const { sendComment, replyComment, deleteById } = commentsSlice.actions;
 
 export default commentsSlice.reducer;
