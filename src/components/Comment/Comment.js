@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { formatDistanceToNow, set } from 'date-fns';
+import { formatDistanceToNow } from 'date-fns';
 
 import styles from './Comment.module.scss';
 import { ReactComponent as PlusIcon } from '../../images/icon-plus.svg';
@@ -9,7 +9,7 @@ import { ReactComponent as ReplyIcon } from '../../images/icon-reply.svg';
 import { ReactComponent as EditIcon } from '../../images/icon-edit.svg';
 import { ReactComponent as DeleteIcon } from '../../images/icon-delete.svg';
 import { getAvatar } from '../../utils';
-import { deleteById, updateById } from '../../slices/commentsSlice';
+import { deleteById, updateById, incrementScore, decrementScore } from '../../slices/commentsSlice';
 import Popup from '../Popup';
 
 const Comment = ({ comment, onReplyClick }) => {
@@ -83,11 +83,11 @@ const Comment = ({ comment, onReplyClick }) => {
     <React.Fragment>
       <div className={styles.comment}>
         <div className={styles.rating}>
-          <button>
+          <button onClick={() => dispatch(incrementScore(id))}>
             <PlusIcon />
           </button>
           <span>{score}</span>
-          <button>
+          <button onClick={() => dispatch(decrementScore(id))}>
             <MinusIcon />
           </button>
         </div>

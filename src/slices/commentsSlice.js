@@ -87,9 +87,52 @@ const commentsSlice = createSlice({
       },
       prepare: (id, newContent) => ({ payload: { id, newContent } }),
     },
+    incrementScore: (state, action) => {
+      const id = action.payload;
+      for (let i = 0; i < state.length; i++) {
+        if (state[i].id === id) {
+          state[i].score += 1;
+          localStorage.setItem('comments', JSON.stringify(state));
+          return;
+        }
+
+        if (state[i].replies) {
+          const replies = state[i].replies;
+          for (let j = 0; j < replies.length; j++) {
+            if (replies[j].id === id) {
+              replies[j].score += 1;
+              localStorage.setItem('comments', JSON.stringify(state));
+              return;
+            }
+          }
+        }
+      }
+    },
+    decrementScore: (state, action) => {
+      const id = action.payload;
+      for (let i = 0; i < state.length; i++) {
+        if (state[i].id === id) {
+          state[i].score -= 1;
+          localStorage.setItem('comments', JSON.stringify(state));
+          return;
+        }
+
+        if (state[i].replies) {
+          const replies = state[i].replies;
+          for (let j = 0; j < replies.length; j++) {
+            if (replies[j].id === id) {
+              replies[j].score -= 1;
+              localStorage.setItem('comments', JSON.stringify(state));
+              return;
+            }
+          }
+        }
+      }
+    },
   },
 });
 
-export const { sendComment, replyComment, deleteById, updateById } = commentsSlice.actions;
+export const { sendComment, replyComment, deleteById, updateById, incrementScore, decrementScore } =
+  commentsSlice.actions;
 
 export default commentsSlice.reducer;
