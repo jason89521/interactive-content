@@ -72,23 +72,44 @@
   }
 }
 
-.reply {
+.buttons {
   position: absolute;
   right: 2rem;
   display: flex;
-  gap: 1rem;
-  align-items: center;
-  background: none;
-  border: none;
-  outline: none;
-  font-size: 1.6rem;
-  font-weight: 700;
+  gap: 1.5rem;
+  
+  button {
+    text-transform: capitalize;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+}
+
+.reply,
+.edit {
   color: $blue;
 
   &:hover {
-    color: lighten($blue, 30%);
+    color: lighten($blue, 20%);
     path {
-      fill: lighten($blue, 30%);
+      fill: lighten($blue, 20%);
+    }
+  }
+}
+
+.delete {
+  color: $red;
+
+  &:hover {
+    color: lighten($red, 20%);
+    path {
+      fill: lighten($red, 20%);
     }
   }
 }

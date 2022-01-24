@@ -38,6 +38,7 @@ const commentsSlice = createSlice({
         };
         const parentComment = state.find(comment => comment.id === action.payload.parentId);
         parentComment.replies.push(reply);
+        localStorage.setItem('comments', JSON.stringify(state));
       },
       prepare: (reply, parentId) => ({
         payload: {
